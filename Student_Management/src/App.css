@@ -1,8 +1,187 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 40px;
+:root {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
 }
 
-h1 {
-  color: #2563eb;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--text-sub);
+  font-size: 1.05rem;
+}
+
+.student-form {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.student-form h3 {
+  margin-bottom: 16px;
+  color: #e2e8f0;
+}
+
+.error-message {
+  color: #f87171;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-group input {
+  flex: 1 1 200px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: var(--primary-color);
+}
+
+.add-btn {
+  padding: 12px 24px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background: var(--primary-hover);
+}
+
+.student-list-container h2 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  color: #cbd5e1;
+}
+
+.no-students {
+  text-align: center;
+  color: var(--text-sub);
+  padding: 24px;
+  border: 1px dashed var(--card-border);
+  border-radius: 8px;
+}
+
+.student-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 16px 20px;
+  border-radius: 10px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.student-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+.card-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.student-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #f1f5f9;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.dept-badge {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.roll-badge {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.delete-btn {
+  padding: 8px 16px;
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: var(--danger-hover);
 }

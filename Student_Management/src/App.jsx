@@ -5,14 +5,24 @@ import StudentList from "./components/StudentList";
 import "./App.css";
 
 function App() {
+  const [students, setStudents] = useState([
+    { id: 1, name: "John Doe", department: "CSE", roll: "101" },
+    { id: 2, name: "Jane Smith", department: "ECE", roll: "102" }
+  ]);
 
-  const [students, setStudents] = useState([]);
+  const handleAddStudent = (newStudent) => {
+    setStudents((prev) => [...prev, { ...newStudent, id: Date.now() }]);
+  };
+
+  const handleDeleteStudent = (id) => {
+    setStudents((prev) => prev.filter((student) => student.id !== id));
+  };
 
   return (
     <div className="container">
       <Header />
-      <StudentForm />
-      <StudentList />
+      <StudentForm onAddStudent={handleAddStudent} />
+      <StudentList students={students} onDeleteStudent={handleDeleteStudent} />
     </div>
   );
 }
