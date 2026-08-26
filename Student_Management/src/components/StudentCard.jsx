@@ -13,4 +13,4 @@ function StudentCard({ student, onDeleteStudent }) {
     );
 }
 
-export default StudentCard;
+export default StudentCard;
