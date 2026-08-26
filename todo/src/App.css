@@ -6,7 +6,7 @@ body {
 }
 
 .todo-app {
-  max-width: 400px;
+  max-width: 450px;
   margin: 0 auto;
   background: white;
   padding: 24px;
@@ -61,13 +61,75 @@ li {
   align-items: center;
   padding: 10px 12px;
   border-bottom: 1px solid #eee;
+  gap: 10px;
 }
 
 li:last-child {
   border-bottom: none;
 }
 
-li button {
+.action-buttons,
+.edit-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.edit-group {
+  flex: 1;
+}
+
+.edit-group input {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #2563eb;
+  border-radius: 4px;
+}
+
+.edit-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #d97706;
+}
+
+.save-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #059669;
+}
+
+.cancel-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: #4b5563;
+}
+
+.delete-btn {
   padding: 6px 12px;
   font-size: 12px;
   background-color: #ef4444;
@@ -77,6 +139,6 @@ li button {
   cursor: pointer;
 }
 
-li button:hover {
+.delete-btn:hover {
   background-color: #dc2626;
 }
