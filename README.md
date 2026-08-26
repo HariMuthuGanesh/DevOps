@@ -1,128 +1,98 @@
-# Mini Calculator Application
+# DevOps Model Lab Repository
 
-A modern, responsive, and feature-rich Mini Calculator web application built with **React** and **Vite**.
-
-## Features
-- **Standard & Scientific Modes**: Switch seamlessly between standard arithmetic and scientific functions (sin, cos, tan, log, ln, square root, powers, π, e).
-- **Memory Operations**: Full support for `MC`, `MR`, `M+`, and `M-`.
-- **Calculation History**: Log past calculations, clear history, or click any past result to reuse it.
-- **Keyboard Support**: Complete keyboard shortcuts (Numbers, Operators, Enter, Backspace, Escape).
-- **Modern Themes**: Support for Dark Obsidian, Cyberpunk Neon, and Minimalist Light themes.
-- **Vite Production Build**: Compiles optimized static assets into the `dist/` directory.
+Welcome to the **DevOps Model Lab** repository. This project demonstrates end-to-end DevOps practices, including Git source control management, React web application development, and Jenkins CI/CD pipeline automation.
 
 ---
 
-## Jenkins Pipeline Setup (`Jenkinsfile`)
+## 📁 Repository Structure
 
-Below is the complete Declarative Jenkins Pipeline script for **Mini Calculator**:
-
-```groovy
-pipeline {
-    agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/HariMuthuGanesh/DevOps.git'
-            }
-        }
-        stage('Install dependencies') {
-            steps {
-                dir('Mini_Calculator') {
-                    bat 'npm install'
-                }
-            }
-        }
-        stage('Build') {
-            steps {
-                dir('Mini_Calculator') {
-                    bat 'npm run build'
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                dir('Mini_Calculator') {
-                    bat 'if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\minicalculator" mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\minicalculator"'
-                    bat 'xcopy /E /I /Y "dist\\*" "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\minicalculator\\"'
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Mini Calculator built and deployed successfully!'
-        }
-        failure {
-            echo 'Mini Calculator Pipeline Build Failed!'
-        }
-    }
-}
+```
+DevOps/
+├── Mini_Calculator/          # Experiment 1 & 2: Minimum React Application (Vite + React)
+│   ├── src/                  # React source components (App.jsx, main.jsx, index.css)
+│   ├── package.json          # Dependencies & scripts
+│   ├── vite.config.js        # Vite bundler configuration
+│   ├── Jenkinsfile           # Jenkins Pipeline definition for Mini Calculator
+│   └── JENKINS_BUILD_STEPS.bat # Windows Batch build script for Freestyle jobs
+├── Backend API Developement/  # Node.js / Express REST API backend service
+│   ├── server.js             # Express API entry point
+│   ├── package.json          # Dependencies & scripts
+│   └── README.md             # Backend service documentation
+├── FreeStyle_Project/        # Jenkins Freestyle Job automation setup
+│   ├── JENKINS_FREESTYLE_STEPS.bat # Freestyle job execution script
+│   └── README.md             # Freestyle job configuration guide
+├── Jenkinsfile               # Root Jenkins Declarative Pipeline
+└── README.md                 # Project & Lab manual (this file)
 ```
 
 ---
 
-## Step 4: Run the Pipeline in Jenkins
+## 🧪 Experiment 1: GitHub Commands & Minimum React Application
 
-1. Create a new **Pipeline** job in Jenkins (or configure an existing Pipeline job).
-2. Under the **Pipeline** section in Jenkins configuration:
-   - Select **Pipeline script** and paste the script above, OR
-   - Select **Pipeline script from SCM**, choose **Git**, set Repository URL to `https://github.com/HariMuthuGanesh/DevOps.git`, Branch to `main`, and Script Path to `Jenkinsfile`.
-3. Save the pipeline configuration.
-4. Click **Build Now**.
-5. Jenkins will execute the pipeline stages:
-   - **Checkout** → Pulls latest code from GitHub (`https://github.com/HariMuthuGanesh/DevOps.git`)
-   - **Install dependencies** → Runs `npm install` in `Mini_Calculator` directory
-   - **Build** → Compiles optimized static assets (`npm run build`) into `dist/`
-   - **Deploy** → Copies contents of `dist/` folder into `C:\ProgramData\Jenkins\.jenkins\userContent\minicalculator\`
+### Overview
+Construct a functional React frontend application, initialize Git version control, and push all project directories cleanly to GitHub without duplicate root files.
 
----
-
-## Step 5: Run / Preview Deployed Application
-
-### Option A: Via Jenkins Hosted UserContent URL
-Open your web browser and navigate to:
-```
-http://localhost:8080/userContent/minicalculator/index.html
-```
-
-### Option B: Run Locally with `serve`
-1. Open **Command Prompt** or **PowerShell**.
-2. Navigate to the deployed folder under Jenkins `userContent`:
-   ```cmd
-   cd C:\ProgramData\Jenkins\.jenkins\userContent\minicalculator
-   ```
-3. Start the static server (using `npx serve` or `http-server`):
-   ```cmd
-   npx serve -s . -l 3000
-   ```
-4. Access the web app in your browser at `http://localhost:3000`.
-
----
-
-## Jenkins Freestyle Build Steps Configuration
-
-For Jenkins Freestyle jobs, use the **Execute Windows batch command** step:
-
-```cmd
-call npm ci || call npm install
-call npm run build
-if not exist "C:\ProgramData\Jenkins\.jenkins\userContent\minicalculator" mkdir "C:\ProgramData\Jenkins\.jenkins\userContent\minicalculator"
-xcopy /E /I /Y "dist\*" "C:\ProgramData\Jenkins\.jenkins\userContent\minicalculator\"
-```
-
----
-
-## Local Development Setup
-
+### 1. Key GitHub Commands Used
 ```bash
-# 1. Install dependencies
-npm install
+# Check repository status
+git status
 
-# 2. Run local development server
-npm run dev
+# Add files to staging area
+git add .
 
-# 3. Build for production
-npm run build
+# Commit changes with descriptive message
+git commit -m "Clean duplicate root files, add Backend API and Freestyle project structures, update Jenkins automation and lab documentation"
+
+# Verify commit history
+git log --oneline -n 5
+
+# Push changes to remote main branch
+git push origin main
 ```
+
+### 2. React Application (`Mini_Calculator`)
+- **Technology Stack**: React 19, Vite, Lucide Icons.
+- **Local Run Instructions**:
+  ```bash
+  cd Mini_Calculator
+  npm install
+  npm run dev
+  ```
+- **Build Production Artifacts**:
+  ```bash
+  npm run build
+  ```
+  *(Generates `dist/` directory containing production bundle)*
+
+---
+
+## 🧪 Experiment 2: Jenkins CI/CD Automation
+
+### Overview
+Automate the build, testing, and deployment of the React application (`Mini_Calculator`) using Jenkins.
+
+### Option A: Declarative Pipeline (`Jenkinsfile`)
+1. Create a **Pipeline** job in Jenkins.
+2. Select **Pipeline script from SCM**.
+3. Set SCM to **Git** with repository URL: `https://github.com/HariMuthuGanesh/DevOps.git`.
+4. Script Path: `Jenkinsfile`.
+
+#### Pipeline Stages:
+- **Checkout**: Pulls latest code from `origin/main`.
+- **Install dependencies**: Runs `npm install` inside `Mini_Calculator`.
+- **Build**: Compiles production bundle with `npm run build`.
+- **Deploy**: Copies `dist/*` output into Jenkins static server directory (`C:\ProgramData\Jenkins\.jenkins\userContent\minicalculator`).
+
+### Option B: Freestyle Job Setup
+1. Create a **Freestyle project** in Jenkins.
+2. Under **Build Steps**, add **Execute Windows batch command**:
+   ```cmd
+   call FreeStyle_Project\JENKINS_FREESTYLE_STEPS.bat
+   ```
+3. Save and click **Build Now**.
+
+---
+
+## 🚀 Deployed Application Access
+Once Jenkins completes the build, access the deployed application at:
+`http://localhost:8080/userContent/minicalculator/index.html`
