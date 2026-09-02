@@ -26,10 +26,25 @@ pipeline{
         stage("Deploy"){
             steps{
                 dir("BMI_Calculator"){
-                    bat 'if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\BMI_Calculator" mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\BMI_Calculator"'
-                    bat 'xcopy /E /I /T "dist\*" "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\BMI_Calculator" '
+                    bat 'if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator"'
+                    bat 'xcopy /E /I /T "dist\*" "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" '
                 }
             }
         }
     }
+}
+post {
+
+        success {
+            echo '========================================'
+            echo 'BUILD SUCCESSFUL'
+            echo 'Application URL: http://localhost:8081'
+            echo '========================================'
+        }
+
+        failure {
+            echo '========================================'
+            echo 'BUILD FAILED'
+            echo '========================================'
+        }
 }
