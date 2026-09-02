@@ -10,7 +10,7 @@ pipeline {
         }
 
         stage("Dependency") {
-            steps {
+            steps { 
                 dir("BMI_Calculator") {
                     bat "npm install"
                 }
@@ -28,13 +28,7 @@ pipeline {
         stage("Deploy") {
             steps {
                 dir("BMI_Calculator") {
-                    bat '''
-                    if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" (
-                        mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator"
-                    )
-
-                    xcopy /E /I /Y dist\\* "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator\\"
-                    '''
+                   bat 'npm run dev'
                 }
             }
         }
