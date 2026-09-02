@@ -1,34 +1,35 @@
+
 pipeline{
     agent any
     stages{
-        stage('Checkout'){
+
+        stage("CheckOut"){
             steps{
-                git branch:'main',url:'https://github.com/HariMuthuGanesh/DevOps.git'
+                git branch:main, url:'https://github.com/HariMuthuGanesh/DevOps.git'
             }
         }
-
-        stage('Install dependencies'){
+        stage("Dependency"){
             steps{
-                dir('Student_Management'){
+                dir('BMI_Calculator'){
                     bat 'npm install'
                 }
             }
         }
-        stage('Build'){
+        stage("Build"){
             steps{
-                dir('Student_Management'){
+                dir("BMI_Calculator"){
                     bat 'npm run build'
                 }
             }
         }
-        stage('Deploy'){
+
+        stage("Deploy"){
             steps{
-                dir('Student_Management'){
-                    bat 'if not exist "C:\ProgramData\Jenkins\.jenkins\userContent\studentmanagement" mkdir "C:\ProgramData\Jenkins\.jenkins\userContent\studentmanagement"'
-                    bat 'xcopy /E /I /Y "dist\*" "C:\ProgramData\Jenkins\.jenkins\userContent\studentmanagement\"'
+                dir("BMI_Calculator"){
+                    bat 'if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\BMI_Calculator" mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\BMI_Calculator"'
+                    bat 'xcopy /E /I /T "dist\*" "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\BMI_Calculator" '
                 }
             }
         }
-    
     }
 }
