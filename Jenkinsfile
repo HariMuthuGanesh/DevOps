@@ -22,15 +22,19 @@ pipeline{
                 }
             }
         }
+stage("Deploy") {
+    steps {
+        dir("BMI_Calculator") {
+            bat '''
+            if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" (
+                mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator"
+            )
 
-        stage("Deploy"){
-            steps{
-                dir("BMI_Calculator"){
-                    bat 'if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator"'
-                    bat 'xcopy /E /I /T "dist\*" "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" '
-                }
-            }
+            xcopy /E /I /Y dist\\* "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator\\"
+            '''
         }
+    }
+}
     }
 }
 post {
