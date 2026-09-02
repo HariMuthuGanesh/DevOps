@@ -1,44 +1,46 @@
-
-pipeline{
+pipeline {
     agent any
-    stages{
 
-        stage("CheckOut"){
-            steps{
-                git branch:main, url:'https://github.com/HariMuthuGanesh/DevOps.git'
+    stages {
+
+        stage("CheckOut") {
+            steps {
+                git branch: 'main', url: 'https://github.com/HariMuthuGanesh/DevOps.git'
             }
         }
-        stage("Dependency"){
-            steps{
-                dir('BMI_Calculator'){
-                    bat 'npm install'
+
+        stage("Dependency") {
+            steps {
+                dir("BMI_Calculator") {
+                    bat "npm install"
                 }
             }
         }
-        stage("Build"){
-            steps{
-                dir("BMI_Calculator"){
-                    bat 'npm run build'
+
+        stage("Build") {
+            steps {
+                dir("BMI_Calculator") {
+                    bat "npm run build"
                 }
             }
         }
-stage("Deploy") {
-    steps {
-        dir("BMI_Calculator") {
-            bat '''
-            if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" (
-                mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator"
-            )
 
-            xcopy /E /I /Y dist\\* "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator\\"
-            '''
+        stage("Deploy") {
+            steps {
+                dir("BMI_Calculator") {
+                    bat '''
+                    if not exist "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator" (
+                        mkdir "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator"
+                    )
+
+                    xcopy /E /I /Y dist\\* "C:\\ProgramData\\Jenkins\\.jenkins\\userContent\\BMI_Calculator\\"
+                    '''
+                }
+            }
         }
     }
-}
-    }
-}
-post {
 
+    post {
         success {
             echo '========================================'
             echo 'BUILD SUCCESSFUL'
@@ -51,4 +53,5 @@ post {
             echo 'BUILD FAILED'
             echo '========================================'
         }
+    }
 }
